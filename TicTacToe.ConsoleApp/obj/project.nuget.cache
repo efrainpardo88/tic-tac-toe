@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "0UpMj4EQHfCEAEaEuLmjxKAlOMG7gzxTkzzkZ47PMmmf8/pjH0J/JUWfOZTnRsNDs4D51qiMaC2Gt4cG+L702w==",
+  "dgSpecHash": "Gh32YqEJxWPBHwSET/LC3dWqKOK9V3iQI94v12IVx8ZPXbzREJB/KGkC2qiCet48TuWvpPszVdu0DXBneA9kCg==",
   "success": true,
   "projectFilePath": "D:\\repos\\tic-tac-toe\\TicTacToe.ConsoleApp\\TicTacToe.ConsoleApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\efrain.pardo\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\efrain.pardo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
