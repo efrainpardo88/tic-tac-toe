@@ -1,0 +1,11 @@
+﻿*.vspscc
+*.vssscc
+*.suo
+*.csproj.user
+*.log
+*.trx
+bin
+obj
+debug
+.vs
+packages
