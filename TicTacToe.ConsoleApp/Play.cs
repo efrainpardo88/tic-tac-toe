@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using TicTacToe.Services;
+﻿using TicTacToe.Services;
 
 namespace TicTacToe.ConsoleApp
 {
@@ -18,48 +17,33 @@ namespace TicTacToe.ConsoleApp
             Console.WriteLine("-----------------------\n");
             Console.WriteLine("Instructions:");
             Console.WriteLine("Enter the position number where you want to place your marker.");
+            
+            DrawBoard();
 
             while (!_game.IsGameOver())
             {
-                _game.DrawBoard();
-
                 if (_game.GetCurrentPlayer() == 'X')
                 {
-                    Console.Write("Your move (X): ");
-                    int position = int.Parse(Console.ReadLine());
-                    int row = (position - 1) / 3;
-                    int col = (position - 1) % 3;
-                    if (_game.IsValidMove(row, col))
-                    {
-                        _game.MakeMove(row, col, 'X');
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid move! Please try again.");
-                        continue;
-                    }
-
-                    // Get computer move and make the move
-                    int[] computerMove = _game.GetComputerMove();
-                    if (_game.IsValidMove(computerMove[0], computerMove[1]))
-                    {
-                        _game.MakeMove(computerMove[0], computerMove[1], 'O');
-
-                        Console.WriteLine("Computer's move (O): {0}\n", computerMove[0] * 3 + computerMove[1] + 1);
-                    }
+                    // Get move for player X
+                    PlayerMove('X');
+                }
+                else
+                {
+                    // Get move for player O
+                    PlayerMove('O');
                 }
             }
 
             Console.WriteLine("\nFinal board:\n");
-            _game.DrawBoard();
+            DrawBoard();
 
             if (_game.CheckWin('X'))
             {
-                Console.WriteLine("\nYou win!");
+                Console.WriteLine("\nX wins!");
             }
             else if (_game.CheckWin('O'))
             {
-                Console.WriteLine("\nComputer wins!");
+                Console.WriteLine("\nO wins!");
             }
             else
             {
@@ -68,6 +52,44 @@ namespace TicTacToe.ConsoleApp
 
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
+        }
+
+        public void PlayerMove(char marker)
+        {
+            while (true)
+            {
+                Console.Write("Your move ({0}): ", marker);
+                var validNumber = int.TryParse(Console.ReadLine(), out int position);
+                int row = validNumber ? (position - 1) / 3 : 0;
+                int col = validNumber ? (position - 1) % 3 : 0;
+                if (_game.IsValidMove(row, col))
+                {
+                    _game.MakeMove(row, col, marker);
+                    DrawBoard();
+                    break;
+                }
+                
+                Console.WriteLine("Invalid move! Please try again.");
+            }
+        }
+
+        public void DrawBoard()
+        {
+            var board = _game.GetBoard();
+
+            if (board.GetLength(0) != 3 || board.GetLength(1) != 3)
+            {
+                Console.WriteLine("Invalid board size!");
+                return;
+            }
+
+            Console.WriteLine("-----------------------\n");
+            Console.WriteLine(" " + board[0, 0] + " | " + board[0, 1] + " | " + board[0, 2] + " ");
+            Console.WriteLine("---|---|---");
+            Console.WriteLine(" " + board[1, 0] + " | " + board[1, 1] + " | " + board[1, 2] + " ");
+            Console.WriteLine("---|---|---");
+            Console.WriteLine(" " + board[2, 0] + " | " + board[2, 1] + " | " + board[2, 2] + " ");
+            Console.WriteLine("Status: {0}", _game.GetStatus());
         }
     }
 }

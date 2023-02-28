@@ -2,8 +2,6 @@
 {
     public interface IGame
     {
-        public void DrawBoard();
-
         public bool IsValidMove(int row, int col);
 
         public void MakeMove(int row, int col, char marker);
@@ -16,8 +14,8 @@
 
         public char GetCurrentPlayer();
 
-        public int[] GetComputerMove();
+        public char[,] GetBoard();
 
-        public int[] LookForWinningMove(char marker);
+        public string GetStatus();
     }
 }
