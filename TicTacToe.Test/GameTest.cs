@@ -130,5 +130,89 @@ namespace TicTacToe.Test
             // Assert
             Assert.True(game.IsGameOver());
         }
+
+        [Fact]
+        public void Test_Get_Current_Player()
+        {
+            // Arrange
+            var game = new Game();
+
+            // Act
+            var currentPlayer = game.GetCurrentPlayer();
+
+            // Assert
+            Assert.Equal('X', currentPlayer);
+        }
+
+        [Fact]
+        public void Test_Check_Tie()
+        {
+            // Arrange
+            var game = new Game();
+            game.MakeMove(0, 0, 'X');
+            game.MakeMove(1, 0, 'O');
+            game.MakeMove(2, 0, 'X');
+            game.MakeMove(1, 1, 'O');
+            game.MakeMove(0, 1, 'X');
+            game.MakeMove(0, 2, 'O');
+            game.MakeMove(1, 2, 'X');
+            game.MakeMove(2, 1, 'O');
+            game.MakeMove(2, 2, 'X');
+
+            // Act
+            var isGameOver = game.IsGameOver();
+
+            // Assert
+            Assert.True(isGameOver);
+            Assert.True(game.CheckTie());
+        }
+
+        [Fact]
+        public void Test_Get_Status_Game_Over()
+        {
+            // Arrange
+            var game = new Game();
+            game.MakeMove(0, 0, 'X');
+            game.MakeMove(1, 0, 'O');
+            game.MakeMove(0, 1, 'X');
+            game.MakeMove(1, 1, 'O');
+            game.MakeMove(0, 2, 'X');
+
+            // Act
+            var status = game.GetStatus();
+
+            // Assert
+            Assert.Equal("Game Over", status);
+        }
+
+        [Fact]
+        public void Test_Get_Status_In_Progress()
+        {
+            // Arrange
+            var game = new Game();
+            game.MakeMove(0, 0, 'X');
+            game.MakeMove(1, 0, 'O');
+
+            // Act
+            var status = game.GetStatus();
+
+            // Assert
+            Assert.Equal("In progress", status);
+        }
+
+        [Fact]
+        public void Test_Get_Board()
+        {
+            // Arrange
+            var game = new Game();
+            game.MakeMove(0, 0, 'X');
+
+            // Act
+            var board = game.GetBoard();
+
+            // Assert
+            Assert.Equal('X', board[0, 0]);
+        }
+
     }
 }

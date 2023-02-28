@@ -54,26 +54,28 @@ namespace TicTacToe.ConsoleApp
             Console.ReadKey();
         }
 
-        public void PlayerMove(char marker)
+        private void PlayerMove(char marker)
         {
             while (true)
             {
                 Console.Write("Your move ({0}): ", marker);
-                var validNumber = int.TryParse(Console.ReadLine(), out int position);
-                int row = validNumber ? (position - 1) / 3 : 0;
-                int col = validNumber ? (position - 1) % 3 : 0;
-                if (_game.IsValidMove(row, col))
+                if (int.TryParse(Console.ReadLine(), out int position))
                 {
-                    _game.MakeMove(row, col, marker);
-                    DrawBoard();
-                    break;
+                    int row = (position - 1) / 3;
+                    int col = (position - 1) % 3;
+                    if (_game.IsValidMove(row, col))
+                    {
+                        _game.MakeMove(row, col, marker);
+                        DrawBoard();
+                        break;
+                    }
                 }
-                
+
                 Console.WriteLine("Invalid move! Please try again.");
             }
         }
 
-        public void DrawBoard()
+        private void DrawBoard()
         {
             var board = _game.GetBoard();
 
